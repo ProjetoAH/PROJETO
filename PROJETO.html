@@ -90,42 +90,44 @@
             <h3>produto 1</h3>
             <p>Fone de Ouvido Bluetooth Sem Fio Wireless 5.1 Duplo Com Visor, Premium Melhor Compra Mix</p>
             <p>Preço: R$ 30,00</p>
-            <button oncklink="Adicionarnocarrinho('produto 2', 30)"> adicionar no carrinho</button>
+            <button oncklink="AdicionarAocarrinho('produto 2', 30)"> Adicionar Ao carrinho</button>
         </div>
         <div class="produto">
 <img src="https://m.media-amazon.com/images/I/61iL94AqGCL._AC_SL1500_.jpg" alt="produto2">
         <h3>produto 2</h3>
         <p>Capa feminina de celular com corrente de amor inglesa para todas as capas para iPhone 13/12/11/X, 2 pacotes - rosa | para iPhone 11
             <p>Preço: R$ 50,00 </p>
-            <button oncklink="Adicionarnocarrinho('produto 2', 30)"> adicionar no carrinho</button>
+            <button oncklink="AdicionarAocarrinho('produto 2', 30)"> Adicionar Ao carrinho</button>
         </div>
         <div class="produto">
             <img src="https://images.tcdn.com.br/img/img_prod/1220136/carregador_de_parede_com_cabo_usb_tipo_c_x_iphone_1_5m_branco_comp_619_1_06737001431e663c31477a1175f031e3.jpg">
             <h3>produto 3</h3>
             <p>CARREGADOR DE PAREDE COM CABO USB TIPO C X IPHONE 1,5M BRANCO - COMP</p>
             <p>Preço: R$ 25,00</p>
-            <button oncklink="Adicionarnocarrinho('produto 2', 30)"> adicionar no carrinho</button>
+            <button oncklink="AdicionarAocarrinho('produto 2', 30)"> Adicionar Ao carrinho</button>
         </div>
     </section>
     <section id="carrinho">
         <img src="">
-        <h2>Carrinho de compras</h2>
+        <h2>Carrinho de Compras</h2>
         |<div id="itens-carrinho">
-            <p>0 carrinho está vázio</p>
+            <p>O carrinho está vázio!</p>
         </div>
-        <p id="total-carrinho">Total: R$ 0,00 </p>
-        <button onclick="finalizarcompra()"> Finalizar Compra</button>
+        <p id="total-carrinho">Total: R$ 0,00</p>
+        <button onclick="FinalizarCompra()"> Finalizar Compra</button>
         </section>
 </main>
 <footer>
     <p>&copy; 2024 Loja Virtual-todos os direitos reservados.</p>
 </footer>
-<script src="script.js">
+
+<script>
+
     let carrinho=[];
     let total= 0;
-    function adicionarnocarrinho(nome, preço){
-        carrinho.push({nome, preço});
-        total+= preço;
+    function AdicionarAocarrinho(nome, preco){
+        carrinho.push({nome, preco});
+        total+= preco;
         atualizarcarrinho();
     }
     function atualizarcarrinho() {
@@ -137,12 +139,39 @@
         carrinhoDiv.innerHTML = '';
 
         carrinho. forEASH((item, index) => {
-            const itemDiv
+            const itemDiv = document.createElement( 'div' );
+            itemDiv.textContent = `${tem.nome} - R$ $
+            {item.preco.toFixed(2)}`;
+            
+            const removeButton = 
+            document.createElement('button');
+            removeButton.textContent = 'Remover';
+            removeButton.onclick = () =>
+            removerDocarrinho(index, item.preco);
+
+            itemDiv.appendChild(removeButton);
+            carrinhoDiv.appendChild(itemDiv);
+});
+if (carrinho.length === 0){
+            carrinhoDiv.innerHTML = '<p>O carrinho está vázio.</p>';
         }
-    }
-    https://m.media-amazon.com/images/I/51-LO2UvRyL.__AC_SX300_SY300_QL70_ML2_.jpg
+        totalDiv. textContent = `total: R$ ${total.toFixed(2)}`;
+}
+function removerDocarrinho(index, preco) {
+    carrinho.splice(index, 1);
+    total -= preco;
+    atualizarcarrinho();
+}
+function FinalizarCompra(){
+    if (carrinho.length === 0) {
+        alert("seu carrinho está vázio!");
+    } else {
+        alert(`compra finalizada! Total: R$ ${total.toFixed(2)}`);
+        carrinho = [];
+        total = 0;
+        atualizarcarrinho();
+        }
+        }
 </script>
 </body>
 </html>
-
-
